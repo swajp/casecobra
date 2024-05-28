@@ -26,6 +26,9 @@ import { ArrowRight, CheckIcon, ChevronsUpDown, Radio, X } from "lucide-react";
 import { BASE_PRICE } from "@/config/products";
 import { useUploadThing } from "@/lib/uploadthing";
 import { useToast } from "@/components/ui/use-toast";
+import { useMutation } from "@tanstack/react-query";
+import { saveConfig as _saveConfig, SaveConfigArgs } from "../actions";
+import { useRouter } from "next/navigation";
 
 interface DesignConfiguratorProps {
   configId: string;
@@ -42,6 +45,26 @@ export default function DesignConfigurator({
   imageDimensions,
 }: DesignConfiguratorProps) {
   const { toast } = useToast();
+
+  const router = useRouter();
+
+  const { mutate: saveConfig } = useMutation({
+    mutationKey: ["save-config"],
+    mutationFn: async (args: SaveConfigArgs) => {
+      await Promise.all([saveConfiguration(), _saveConfig(args)]);
+    },
+    onError: () => {
+      toast({
+        title: "Something went wrong",
+        description: "There was an error on our end. Please try again.",
+        variant: "destructive",
+      });
+    },
+    onSuccess: () => {
+      router.push(`/configure/preview?id=${configId}`);
+    },
+  });
+
   const [options, setOptions] = useState<{
     color: (typeof COLORS)[number];
     model: (typeof MODELS.options)[number];
@@ -366,7 +389,19 @@ export default function DesignConfigurator({
                     100
                 )}
               </p>
-              <Button onClick={saveConfiguration} size="sm" className="w-full">
+              <Button
+                onClick={() =>
+                  saveConfig({
+                    configId,
+                    color: options.color.value,
+                    finish: options.finish.value,
+                    material: options.material.value,
+                    model: options.model.value,
+                  })
+                }
+                size="sm"
+                className="w-full"
+              >
                 Continue
                 <ArrowRight className="h-4 w-4 ml-1.5" />
               </Button>
@@ -374,6 +409,9 @@ export default function DesignConfigurator({
           </div>
         </div>
       </div>
+      <div className=" bg-blue-950 border-blue-950" />
+      <div className="bg-rose-950 border-rose-950" />
+      <div className="bg-zinc-900 border-zinc-900" />
     </div>
   );
 }
