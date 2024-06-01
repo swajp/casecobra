@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Recursive } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import { Toaster } from "@/components/ui/toaster";
 import Providers from "@/components/Providers";
 
-const inter = Inter({ subsets: ["latin"] });
+const font = Recursive({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -20,9 +20,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={font.className}>
         <Navbar />
-        <main className="flex flex-col min-h-[calc(100vh-3.5rem-1px)]">
+        <main className="flex grainy-light flex-col min-h-[calc(100vh-3.5rem-1px)]">
           <div className="flex-1 flex flex-col h-full">
             <Providers>{children}</Providers>
           </div>
