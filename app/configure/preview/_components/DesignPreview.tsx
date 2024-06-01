@@ -10,13 +10,22 @@ import { useMutation } from "@tanstack/react-query";
 import { ArrowRightIcon, CheckIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import Confetti from "react-dom-confetti";
+import { createCheckoutSession } from "../actions";
+import { useRouter } from "next/navigation";
+import { useToast } from "@/components/ui/use-toast";
+import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import LoginModal from "./login-modal";
 
 export default function DesignPreview({
   configuration,
 }: {
   configuration: Configuration;
 }) {
-  const [showConfetti, setShowConfetti] = useState(false);
+  const { toast } = useToast();
+  const { user } = useKindeBrowserClient();
+  const router = useRouter();
+  const [showConfetti, setShowConfetti] = useState<boolean>(false);
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
   useEffect(() => setShowConfetti(true));
   const tw = COLORS.find(
     (supportedColor) => supportedColor.value === configuration.color
@@ -33,10 +42,35 @@ export default function DesignPreview({
   if (configuration.finish === "textured")
     totalPrice += PRODUCT_PRICES.finish.textured;
 
-  const {} = useMutation({
+  const { mutate: createPaymentSession } = useMutation({
     mutationKey: ["get-checkout-session"],
-    //    mutationFn:
+    mutationFn: createCheckoutSession,
+    onSuccess: ({ url }) => {
+      if (url) {
+        router.push(url);
+      } else {
+        throw new Error("Failed to create checkout session");
+      }
+    },
+    onError: (error) => {
+      toast({
+        title: "Failed to create checkout session",
+        description: "There was an error on our end. Please try again later.",
+        variant: "destructive",
+      });
+    },
   });
+
+  const handleCheckout = () => {
+    if (user) {
+      createPaymentSession({
+        configId: configuration.id,
+      });
+    } else {
+      localStorage.setItem("configurationId", configuration.id);
+      setIsLoginModalOpen(true);
+    }
+  };
 
   return (
     <>
@@ -49,6 +83,7 @@ export default function DesignPreview({
           config={{ elementCount: 200, spread: 90 }}
         />
       </div>
+      <LoginModal isOpen={isLoginModalOpen} setIsOpen={setIsLoginModalOpen} />
       <div className="mt-20 grid grid-cols-1 text-sm sm:grid-cols-12 sm:grid-rows-1 sm:gap-x-6 md:gap-x-8 lg:gap-x-12">
         <div className="sm:col-span-4 md:col-span-3 md:row-span-2 md:row-end-2">
           <Phone
@@ -120,9 +155,10 @@ export default function DesignPreview({
             </div>
             <div className="mt-8 flex justify-end pb-12">
               <Button
-                isLoading={true}
-                disabled={true}
-                loadingText="Loading"
+                onClick={
+                  () => handleCheckout()
+                  //TO-DO pridat id usera aby to nehazelo chybu
+                }
                 className="px-4 sm:px-6 lg:px-8"
               >
                 Check out <ArrowRightIcon className="h-4 w-4 ml-1.5" />
