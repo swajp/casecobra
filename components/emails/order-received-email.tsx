@@ -72,7 +72,7 @@ export default function OrderReceivedEmail({
                   <Text style={global.paragraphWithBold}>Order Number</Text>
                   <Text style={global.paragraphWithBold}>{orderId}</Text>
                 </Column>
-                <Column style={{ width: 170 }}>
+                <Column style={{ width: 170, marginLeft: 20 }}>
                   <Text style={global.paragraphWithBold}>Order Date</Text>
                   <Text style={global.paragraphWithBold}>{orderDate}</Text>
                 </Column>
