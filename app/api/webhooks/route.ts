@@ -67,19 +67,20 @@ export async function POST(req: NextRequest) {
         },
       });
       await resend.emails.send({
-        from: "CaseCobra <stejskalmira@icloud.com>",
+        from: "CaseCobra <stejsalmira@icloud.com>",
         to: [event.data.object.customer_details.email],
-        subject: "Thank you for your purchase",
+        subject: "Thanks for your order!",
         react: OrderReceivedEmail({
           orderId,
           orderDate: updatedOrder.createdAt.toLocaleDateString(),
           // @ts-ignore
           shippingAddress: {
             name: session.customer_details!.name!,
-            city: billingAdress!.city!,
-            country: billingAdress!.country!,
-            postalCode: billingAdress!.postal_code!,
-            street: billingAdress!.line1!,
+            city: shippingAdress!.city!,
+            country: shippingAdress!.country!,
+            postalCode: shippingAdress!.postal_code!,
+            street: shippingAdress!.line1!,
+            state: shippingAdress!.state,
           },
         }),
       });
