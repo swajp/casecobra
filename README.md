@@ -1,36 +1,35 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Demo Link
 
-## Getting Started
+### https://shop-casecobra.vercel.app
 
-First, run the development server:
+## About this project
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- 💻 Shop built from scratch in Next.js 14
+- 💳 Admin dashboard to manage orders
+- 🖱 Drag-and-drop file uploads
+- 🌟 Clean, modern UI using shadcn-ui
+- 📱 Completely custom phone case configurator
+- 🔑 Kinde Auth
+- ✉️ Beautiful thank-you email after purchase
+- 🤤 100% written in TypeScript
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Project Preview
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Landing Page
+![image](https://github.com/swajp/casecobra/assets/65676574/b618e71c-811d-42c4-ab73-8bba685d91ba)
+![image](https://github.com/swajp/casecobra/assets/65676574/18917d7c-2130-419a-b24f-0b21628867a4)
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Image Configuration
 
-## Learn More
+![image](https://github.com/swajp/casecobra/assets/65676574/5f1a33e5-fab8-43b5-a086-372b5f04f912)
+![image](https://github.com/swajp/casecobra/assets/65676574/6ce622c1-47da-4710-8d92-1e173dcbf9fa)
 
-To learn more about Next.js, take a look at the following resources:
+## Finishing Part
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+![image](https://github.com/swajp/casecobra/assets/65676574/820f7efa-6d9e-4749-8a14-526be713423e)
+![image](https://github.com/swajp/casecobra/assets/65676574/856c0099-8b17-46b0-aac7-4b13d10a3652)
+![image](https://github.com/swajp/casecobra/assets/65676574/16ac2cc6-f22f-4087-8c73-f8c20a26536f)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Admin Dashboard
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+![image](https://github.com/swajp/casecobra/assets/65676574/f175bec0-2ebe-46cd-bc0e-8e1feb4ec8ee)
