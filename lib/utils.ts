@@ -41,5 +41,6 @@ export function constructMetadata({
       creator: "@swajp",
     },
     icons,
+    metadataBase: new URL("https://shop-casecobra.vercel.app"),
   };
 }
